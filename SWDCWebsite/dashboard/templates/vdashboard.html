@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volunteer Dashboard</title>
+  {% load static %}
+  <link rel="icon" href="./../../static/auth/images/swdlogo.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <link rel="stylesheet" href='{% static "dashboard/css/style.css" %}' />
+</head>
+
+<body id="body-pd">
+  <header class="header" id="header">
+    <div class="header_toggle">
+      <i class="bx bx-menu" id="header-toggle"></i>
+    </div>
+    <h5>Logged in as {{request.user}}</h5>
+  </header>
+  <div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+      <div>
+        <div class="nav_list">
+          <a href="{% url 'vdashboard' %}" class="nav_link active" method="GET">
+            <i class="bx bx-grid-alt nav_icon"></i>
+            <span class="nav_name">Dashboard</span>
+          </a>
+          <a href="{% url 'vresetpass' %}" class="nav_link" method="GET">
+            <i class="bx bx-user nav_icon"></i>
+            <span class="nav_name">Change Password</span>
+          </a>
+        </div>
+      </div>
+      <a href="{% url 'logout' %}" class="nav_link">
+        <i class="bx bx-log-out nav_icon"></i>
+        <span class="nav_name">SignOut</span>
+      </a>
+    </nav>
+  </div>
+  <div class="height-100 bg-light">
+    {% include 'messages.html' %} {% block vcontent %}
+    {% if obj.submitted == 1 %}
+    {% if obj.verified == 0  or obj.verified == 2 %}
+    <div class="alert alert-success" role="alert">
+      Your form has been submitted. It is yet to be verified by coordinator {{obj.Cordinator}}
+    </div>
+    <!-- <h5>Your form has been submitted. It is yet to be verified by coordinator {{obj.Cordinator}}</h5> -->
+    <form>
+      <h4 class="text-center">Your responses are</h4>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Objective of the Activity (Minimum 50 Words)</label>
+        <textarea name="quest1" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Objective_of_the_Activity}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Description of the Activity (Minimum 100 words)</label>
+        <textarea name="quest2" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Description_of_the_Activity}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Benefits to Society (Minimum 100 words)</label>
+        <textarea name="quest3" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Benefits_to_Society}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Benefits to Self (Minimum 100 Words)</label>
+        <textarea name="quest4" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Benefits_to_Self}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Learning, Experiences, challenges that you want to share (Minimum
+          100 words)</label>
+        <textarea name="quest5" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Learning_Experiences_challenges}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">How did it help you to shape your Empathy (Minimum 50
+          words)</label>
+        <textarea name="quest6" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.How_did_it_help_you_to_shape_your_Empathy}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Drive link</label>
+        <textarea name="quest7" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.url}}</textarea>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Coordinator name</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+          <option disabled selected value>{{obj.Cordinator}}</option>
+        </select>
+      </div>
+    </form>
+    {% endif %}
+    {% endif %}
+
+
+
+
+
+    {% if obj.submitted == 1 and obj.verified == 1 %}
+    <div class="alert alert-success" role="alert">
+      Congratulations!! Your form has been verified by {{obj.Cordinator}}
+    </div>    
+    <!-- <h5>Congratulations!! Your form has been verified by {{obj.Cordinator}}</h5> -->
+    <form>
+      <h4 class="text-center">Your responses are</h4>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Objective of the Activity (Minimum 50 Words)</label>
+        <textarea name="quest1" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Objective_of_the_Activity}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Description of the Activity (Minimum 100 words)</label>
+        <textarea name="quest2" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Description_of_the_Activity}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Benefits to Society (Minimum 100 words)</label>
+        <textarea name="quest3" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Benefits_to_Society}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Benefits to Self (Minimum 100 Words)</label>
+        <textarea name="quest4" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Benefits_to_Self}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Learning, Experiences, challenges that you want to share (Minimum
+          100 words)</label>
+        <textarea name="quest5" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.Learning_Experiences_challenges}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">How did it help you to shape your Empathy (Minimum 50
+          words)</label>
+        <textarea name="quest6" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.How_did_it_help_you_to_shape_your_Empathy}}</textarea>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Drive link</label>
+        <textarea name="quest7" class="form-control" id="form6Example7" rows="4" disabled>
+{{obj.url}}</textarea>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Coordinator name</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+          <option disabled selected value>{{obj.Cordinator}}</option>
+        </select>
+      </div>
+    </form>
+    {% endif %}
+
+    {% if obj.submitted == 0 and obj.verified == 0 %}
+
+
+    <form action="{% url 'vdashboard' %}" class="needs-validation" method="post" novalidate>
+      {% csrf_token %}
+
+      <h4 class="text-center">Report Filling</h4>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Objective of the Activity (Minimum 50 Words)</label>
+        <textarea name="quest1" class="form-control" id="form6Example7" rows="4" minlength="300" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 50 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Description of the Activity (Minimum 100 words)</label>
+        <textarea name="quest2" class="form-control" id="form6Example7" rows="4" minlength="650" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 100 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Benefits to Society (Minimum 100 words)</label>
+        <textarea name="quest3" class="form-control" id="form6Example7" rows="4" minlength="650" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 50 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Benefits to Self (Minimum 100 Words)</label>
+        <textarea name="quest4" class="form-control" id="form6Example7" rows="4" minlength="650" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 100 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Learning, Experiences, challenges that you want to share (Minimum
+          100 words)</label>
+        <textarea name="quest5" class="form-control" id="form6Example7" rows="4" minlength="650" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 100 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">How did it help you to shape your Empathy (Minimum 50
+          words)</label>
+        <textarea name="quest6" class="form-control" id="form6Example7" rows="4" minlength="300" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 50 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Enter your drive link</label>
+        <textarea name="quest7" class="form-control" id="form6Example7" rows="4"></textarea>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Select your Coordinator name</label>
+        </div>
+        <select required name="Cord" class="custom-select" id="inputGroupSelect01">
+          <option disabled selected value>Choose...</option>
+          {% for c in coord %}
+          <option value="{{c.cname}}">{{c.cname}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- Submit button -->
+      <button type="submit" class="btn btn sub-btn btn-block mb-4">
+        Submit
+      </button>
+    </form>
+    {% endif %}
+
+
+
+
+    {% if obj.submitted == 0 and obj.verified == 2 %}
+
+
+    <form action="{% url 'vdashboard' %}" class="needs-validation" method="post" novalidate>
+      {% csrf_token %}
+      <div class="alert alert-danger" role="alert">
+        Your form was rejected by {{obj.Cordinator}}. Please fill it again
+      </div>
+      <!-- <h3>Your form was rejected by {{obj.Cordinator}}. Please fill it again</h3> -->
+      <h4 class="text-center">Report Filling</h4>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Objective of the Activity (Minimum 50 Words)</label>
+        <textarea name="quest1" class="form-control" id="form6Example7" rows="4" minlength="300" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 50 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Description of the Activity (Minimum 100 words)</label>
+        <textarea name="quest2" class="form-control" id="form6Example7" rows="4" minlength="650" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 100 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Benefits to Society (Minimum 100 words)</label>
+        <textarea name="quest3" class="form-control" id="form6Example7" rows="4" minlength="650" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 50 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Benefits to Self (Minimum 100 Words)</label>
+        <textarea name="quest4" class="form-control" id="form6Example7" rows="4" minlength="650" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 100 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Learning, Experiences, challenges that you want to share (Minimum
+          100 words)</label>
+        <textarea name="quest5" class="form-control" id="form6Example7" rows="4" minlength="650" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 100 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">How did it help you to shape your Empathy (Minimum 50
+          words)</label>
+        <textarea name="quest6" class="form-control" id="form6Example7" rows="4" minlength="300" required></textarea>
+        <div class="invalid-feedback">
+          Atleast 50 words required.
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example7">Enter your drive link</label>
+        <textarea name="quest7" class="form-control" id="form6Example7" rows="4"></textarea>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Select your Coordinator name</label>
+        </div>
+        <select name="Cord" class="custom-select" id="inputGroupSelect01">
+          <option disabled selected value>Choose...</option>
+          {% for c in coord %}
+          <option value="{{c.cname}}">{{c.cname}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- Submit button -->
+      <button type="submit" class="btn btn sub-btn btn-block mb-4">
+        Submit
+      </button>
+    </form>
+    {% endif %}
+    {% endblock vcontent %}
+  </div>
+  <!--Container Main end-->
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
+  <script src="{% static 'dashboard/js/index.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>

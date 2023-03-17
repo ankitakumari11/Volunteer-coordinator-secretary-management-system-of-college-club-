@@ -1,0 +1,134 @@
+{% extends 'cdashboard.html' %}
+{% block ccontent %}
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/style.css" %}'>
+    <title> View Volunteer</title>
+    <link rel="icon" href="./../../static/auth/images/swdlogo.png">
+</head>
+
+<body>
+
+    <form action="{% url 'ApproveVolunteer' %}" method="post">
+        {% csrf_token %}
+        <div class="alert alert-warning" role="alert">
+            Viewing data of {{volunteer_data.Name}}
+          </div>
+        <!-- <h1>Viewing data of {{volunteer_data.Name}}</h1> -->
+
+        <fieldset>
+
+            <!-- <label for="name">Name:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.Name}} fieldset disabled="disabled">
+
+            <label for="mail">Email:</label>
+            <input type="email" id="mail" name="user_email" value={{volunteer_data.email}} fieldset disabled="disabled">
+
+            <label for="name">Gender:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.gender}} fieldset disabled="disabled">
+
+            <label for="name">activity:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.activity}} fieldset
+                disabled="disabled">
+
+            <label for="name">dept:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.dept}} fieldset disabled="disabled">
+
+            <label for="name">academic_year:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.academic_year}} fieldset
+                disabled="disabled">
+
+            <label for="name">module:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.module}} fieldset disabled="disabled">
+
+
+            <label for="name">DIV:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.div}} fieldset disabled="disabled">
+            
+
+
+            <label for="name">Current_address</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.current_add}} fieldset
+                disabled="disabled">
+
+
+            <label for="name">prn:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.prn}} fieldset disabled="disabled">
+
+
+
+            <label for="name">roll:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.roll}} fieldset disabled="disabled">
+
+
+            <label for="name">contact_num:</label>
+            <input type="text" id="name" name="user_name" value={{volunteer_data.contact_num}} fieldset
+                disabled="disabled"> -->
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Objective of the Activity (Minimum 50 Words)</label>
+                <textarea name="quest1" class="form-control" id="form6Example7" rows="4" disabled>
+{{volunteer_data.Objective_of_the_Activity}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Description of the Activity (Minimum 100 words)</label>
+                <textarea name="quest2" class="form-control" id="form6Example7" rows="4" disabled>
+{{volunteer_data.Description_of_the_Activity}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Benefits to Society (Minimum 100 words)</label>
+                <textarea name="quest3" class="form-control" id="form6Example7" rows="4" disabled>
+{{volunteer_data.Benefits_to_Society}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Benefits to Self (Minimum 100 Words)</label>
+                <textarea name="quest4" class="form-control" id="form6Example7" rows="4" disabled>
+{{volunteer_data.Benefits_to_Self}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Learning, Experiences, challenges that you want to share
+                    (Minimum 100
+                    words)</label>
+                <textarea name="quest5" class="form-control" id="form6Example7" rows="4" disabled>
+{{volunteer_data.Learning_Experiences_challenges}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">How did it help you to shape your Empathy (Minimum 50
+                    words)</label>
+                <textarea name="quest6" class="form-control" id="form6Example7" rows="4" disabled>
+{{volunteer_data.How_did_it_help_you_to_shape_your_Empathy}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Drive link</label>
+                <textarea name="quest7" class="form-control" id="form6Example7" rows="4" disabled>
+{{volunteer_data.url}}</textarea>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Cordinator:</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option disabled selected value>{{volunteer_data.Cordinator}}</option>
+                </select>
+            </div>
+            <input type="hidden" name="number" value="{{volunteer_data.contact_num}}">
+            <input class="btn btn sub-btn btn-block mb-4" type="submit" value="Verify">
+        </fieldset>
+    </form>
+    <form action="{% url 'rejectVolunteer' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="number" value="{{volunteer_data.contact_num}}">
+        <input class="btn btn sub-btn btn-block mb-4" style="background-color: red;" type="submit" value="Reject">
+    </form>
+</body>
+{% endblock ccontent %}

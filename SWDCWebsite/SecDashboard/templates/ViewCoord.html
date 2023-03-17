@@ -1,0 +1,92 @@
+{% extends 'sdashboard.html' %}
+{% block scontent %}
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/ViewVolunteer.css" %}'>
+    <title>Sign Up Form</title>
+</head>
+
+<body>
+
+    <form action="{% url 'ApproveCoord' %}" method="POST">
+        {% csrf_token %}
+        <div class="alert alert-warning" role="alert">
+            Viewing data of {{coord_data.cname}}
+          </div>
+        <!-- <h1>Viewing data of {{coord_data.cname}}</h1> -->
+
+        <fieldset>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Objective of the Activity (Minimum 50 Words)</label>
+                <textarea name="quest1" class="form-control" id="form6Example7" rows="4" disabled>
+    {{coord_data.Objective_of_the_Activity}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Description of the Activity (Minimum 100 words)</label>
+                <textarea name="quest2" class="form-control" id="form6Example7" rows="4" disabled>
+    {{coord_data.Description_of_the_Activity}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Benefits to Society (Minimum 100 words)</label>
+                <textarea name="quest3" class="form-control" id="form6Example7" rows="4" disabled>
+    {{coord_data.Benefits_to_Society}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Benefits to Self (Minimum 100 Words)</label>
+                <textarea name="quest4" class="form-control" id="form6Example7" rows="4" disabled>
+    {{coord_data.Benefits_to_Self}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Learning, Experiences, challenges that you want to share
+                    (Minimum 100
+                    words)</label>
+                <textarea name="quest5" class="form-control" id="form6Example7" rows="4" disabled>
+    {{coord_data.Learning_Experiences_challenges}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">How did it help you to shape your Empathy (Minimum 50
+                    words)</label>
+                <textarea name="quest6" class="form-control" id="form6Example7" rows="4" disabled>
+    {{coord_data.How_did_it_help_you_to_shape_your_Empathy}}</textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form6Example7">Drive link</label>
+                <textarea name="quest7" class="form-control" id="form6Example7" rows="4" disabled>
+    {{coord_data.url}}</textarea>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Secretary</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option disabled selected value>{{coord_data.Secretary}}</option>
+                </select>
+            </div>
+
+
+
+        </fieldset>
+        <!-- <button type="submit">Sign Up</button> -->
+
+        {% csrf_token %}
+        <input type="hidden" name="number" value="{{coord_data.contact_num}}">
+        <input class="btn btn sub-btn btn-block mb-4" type="submit" value="Verify">
+    </form>
+    <form action="{% url 'rejectCoord' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="number" value="{{coord_data.contact_num}}">
+        <input class="btn btn sub-btn btn-block mb-4" style="background-color: red;" type="submit" value="Reject">
+    </form>
+</body>
+{% endblock scontent %}
